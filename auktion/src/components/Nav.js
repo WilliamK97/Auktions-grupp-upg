@@ -6,7 +6,7 @@ export default class Nav extends React.Component {
             <div>
             <nav className="blue-grey darken-1">
                 <div className="nav-wrapper container ">
-                <a className="brand-logo">Auktion App</a>
+                <a className="brand-logo orange-text">Auktion App</a>
                  
                 <ul id="nav-mobile" className="right hide-on-med-and-down">
                     <li><a href="/">Home</a></li>

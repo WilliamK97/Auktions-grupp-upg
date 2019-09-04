@@ -12,10 +12,10 @@ function App() {
           <div>
         
             <Nav/>
-            <Route path="/new" component={NewAuktion}/>
-              <div className="center container">
-                <AuktionContainer/>
-              </div>
+            <div className="center container">
+              <Route exact path="/" component={AuktionContainer}/>
+              <Route path="/new" component={NewAuktion}/>
+            </div> 
           </div>
         </BrowserRouter>
     

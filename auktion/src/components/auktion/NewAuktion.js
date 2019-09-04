@@ -60,7 +60,6 @@ export default class NewAuktion extends React.Component {
                 </div>
                 
             </div>
-            <hr/>
         </div>
     )
 }
