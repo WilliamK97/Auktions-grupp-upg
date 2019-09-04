@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import AuktionList from "./AuktionList"
 
+
+const url = "http://nackowskis.azurewebsites.net/api/Auktion/2150/";
+
 export class AuktionContainer extends Component {
 
     constructor(props)
@@ -13,8 +16,6 @@ export class AuktionContainer extends Component {
 
     componentDidMount()
     {
-        const url = "http://nackowskis.azurewebsites.net/api/Auktion/2150/";
-
         fetch(url)
         .then(response => response.json())
         .then( json => console.log(json) + this.setState({
@@ -25,9 +26,11 @@ export class AuktionContainer extends Component {
 
     render() {
         return (
-            <div>
-                <AuktionList auktion={this.state.auktions}/>
-            </div>
+            
+                <div>
+                    <AuktionList auktion={this.state.auktions}/>
+                </div>
+            
         )
     }
 }
