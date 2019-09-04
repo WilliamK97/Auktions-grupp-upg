@@ -8,16 +8,16 @@ import NewAuktion from "./components/auktion/NewAuktion"
 
 function App() {
   return (
-  <BrowserRouter>
-      <div>
-    
-        <Nav/>
-        <Route path="/new" component={NewAuktion}/>
-          <div className="center container">
-            <AuktionContainer/>
+      <BrowserRouter>
+          <div>
+        
+            <Nav/>
+            <Route path="/new" component={NewAuktion}/>
+              <div className="center container">
+                <AuktionContainer/>
+              </div>
           </div>
-      </div>
-    </BrowserRouter>
+        </BrowserRouter>
     
   );
 }

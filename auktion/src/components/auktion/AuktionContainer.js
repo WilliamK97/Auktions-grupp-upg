@@ -30,6 +30,8 @@ export class AuktionContainer extends Component {
                 <div>
                     <AuktionList auktion={this.state.auktions}/>
                 </div>
+
+
             
         )
     }

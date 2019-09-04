@@ -20,14 +20,14 @@ export default class NewAuktion extends React.Component {
                         <input placeholder="Description" id="Beskrivning" name="Beskrivning" ref="Beskrivning" type="text" required/>
                     </div>
 
-                    {/* todays date */}
+                    {/* todays date med value={moment().format('MMM DD, YYYY')}*/}
                     <div className="input-field">
                         <i className="material-icons prefix">date_range</i>
                         <label htmlFor="StartDatum"></label>
                         <input placeholder="Start Date" className="black-border" type="text" id="StartDatum" name="StartDatum" /* value={moment().format('MMM DD, YYYY')} */ readOnly />
                     </div>
                     
-                    {/* date picker */}
+                    {/* date picker med ref={this.datepicker}*/}
                     <div className="input-field">
                         <i className="material-icons prefix">date_range</i>
                         <label htmlFor="SlutDatum"></label>
