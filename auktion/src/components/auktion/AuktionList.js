@@ -4,9 +4,10 @@ import { NavLink } from 'react-router-dom';
 export default class AuktionList extends React.Component{
     render ()
     {
+        const todaysDate = Date.now();
 
         const aktuellaAuktioner = this.props.auktion.filter(a => {
-            return Date.parse(a.SlutDatum) >= Date.now();
+            return Date.parse(a.SlutDatum) >= todaysDate;
         });
 
         let auktion = aktuellaAuktioner!== undefined ?  (aktuellaAuktioner.map( a => {

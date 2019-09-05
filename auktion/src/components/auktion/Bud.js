@@ -4,7 +4,6 @@ export default function Tables(props){
     const budArray = props.bud !== undefined ? (props.bud.map(bud => {
         return(
             <span key={bud.BudID}>
-                <li>{bud.AuktionID}</li>
                 <li>{bud.Budgivare}</li>
                 <li>{bud.Summa}</li>
             </span>

@@ -49,7 +49,7 @@ export class AuktionContainer extends Component {
                 </span>
               <BrowserRouter>
                 <Route exact path='/' component={() => <AuktionList auktion={this.state.auktions} handleBudId={this.handleBudId} />}></Route>
-                <Route path='/auktion/:bud_id' component={() => <Bud bud={this.state.bud} />}></Route>
+                <Route path='/auktion' component={() => <Bud bud={this.state.bud} />}></Route>
                 </BrowserRouter>  
 
                 </div>
