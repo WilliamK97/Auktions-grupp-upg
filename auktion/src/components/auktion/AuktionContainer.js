@@ -15,7 +15,8 @@ export class AuktionContainer extends Component {
         super(props);
         this.state = { 
             auktions: [],
-            bud:[]
+            bud:[],
+            auktion1:[]
         }
     }
 
@@ -31,7 +32,9 @@ export class AuktionContainer extends Component {
 
     handleBudId = (e) => {
         const budID = e.target.innerHTML;
+        const auktionID = e.target.innerHTML;
         const url = `http://nackowskis.azurewebsites.net/api/Bud/2130/${budID}`;
+        const url2 = `http://nackowskis.azurewebsites.net/api/auktion/2130/${auktionID}`;
 
         fetch(url)
         .then(response => response.json())
@@ -39,6 +42,13 @@ export class AuktionContainer extends Component {
             this.setState({
                 bud: json
         }));
+
+        fetch(url2)
+        .then(response => response.json())
+        .then(json => console.log(json) + 
+            this.setState({
+                auktion1: json
+        }));        
     }
 
     render() {
@@ -49,7 +59,7 @@ export class AuktionContainer extends Component {
                 </span>
               <BrowserRouter>
                 <Route exact path='/' component={() => <AuktionList auktion={this.state.auktions} handleBudId={this.handleBudId} />}></Route>
-                <Route path='/auktion' component={() => <Bud bud={this.state.bud} />}></Route>
+                <Route path='/auktion' component={() => <Bud auktion={this.state.auktion1} bud={this.state.bud} />}></Route>
                 </BrowserRouter>  
 
                 </div>
