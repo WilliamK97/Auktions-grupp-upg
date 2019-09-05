@@ -1,14 +1,14 @@
 import React from 'react';
-
+import { NavLink } from 'react-router-dom';
 
 export default class AuktionList extends React.Component{
     render ()
     {
         let auktion = this.props.auktion.map( a => {
 
-            return (
+            return (<div>
                 
-                <div className="row">
+                <div  key={a.AuktionID} className="row">
                     <div className="col s4">
                         <div className="card blue-grey darken-1">
                             <div className="card-content white-text">
@@ -23,13 +23,13 @@ export default class AuktionList extends React.Component{
                                 </div>
                                 {/* fixa route här till annonsen på en ny sida */}
                                 <div class="card-action padding">
-                                    <a href="#">Till annons</a>
+                                    <button onClick={this.props.handleBudId}><NavLink to='/bud'>{a.AuktionID}</NavLink></button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+               </div> 
             )
         });
 
