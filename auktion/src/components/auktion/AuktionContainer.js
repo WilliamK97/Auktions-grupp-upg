@@ -6,7 +6,7 @@ import {  BrowserRouter, Route } from 'react-router-dom';
 
 
 
-const url = "http://nackowskis.azurewebsites.net/api/Auktion/2140/";
+const url = "http://nackowskis.azurewebsites.net/api/Auktion/2130/";
 
 export class AuktionContainer extends Component {
 
@@ -31,7 +31,7 @@ export class AuktionContainer extends Component {
 
     handleBudId = (e) => {
         const budID = e.target.innerHTML;
-        const url = `http://nackowskis.azurewebsites.net/api/Bud/2140/${budID}`;
+        const url = `http://nackowskis.azurewebsites.net/api/Bud/2130/${budID}`;
 
         fetch(url)
         .then(response => response.json())
@@ -49,7 +49,7 @@ export class AuktionContainer extends Component {
                 </span>
               <BrowserRouter>
                 <Route exact path='/' component={() => <AuktionList auktion={this.state.auktions} handleBudId={this.handleBudId} />}></Route>
-                <Route path='/bud' component={() => <Bud bud={this.state.bud} />}></Route>
+                <Route path='/auktion/:bud_id' component={() => <Bud bud={this.state.bud} />}></Route>
                 </BrowserRouter>  
 
                 </div>

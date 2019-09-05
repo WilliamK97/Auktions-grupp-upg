@@ -4,10 +4,14 @@ import { NavLink } from 'react-router-dom';
 export default class AuktionList extends React.Component{
     render ()
     {
-        let auktion = this.props.auktion.map( a => {
 
-            return (<div>
-                
+        const aktuellaAuktioner = this.props.auktion.filter(a => {
+            return Date.parse(a.SlutDatum) >= Date.now();
+        });
+
+        let auktion = aktuellaAuktioner!== undefined ?  (aktuellaAuktioner.map( a => {
+            return (
+            <div>
                 <div  key={a.AuktionID} className="row">
                     <div className="col s4">
                         <div className="card blue-grey darken-1">
@@ -19,11 +23,14 @@ export default class AuktionList extends React.Component{
                                     <p>{a.Utropspris} kr</p>
                                     <hr/>
                                     <p>Slutdatum: {a.SlutDatum.slice(5, -9)}</p>
+                                    <p>Visa mer:</p>
                                     
                                 </div>
                                 {/* fixa route här till annonsen på en ny sida */}
-                                <div class="card-action padding">
-                                    <button onClick={this.props.handleBudId}><NavLink to='/bud'>{a.AuktionID}</NavLink></button>
+                                <div className="card-action padding">
+                                    <button className="orange btn btn:hover center" onClick={this.props.handleBudId}>
+                                        <NavLink className="orange-text" to='/auktion'>{a.AuktionID}</NavLink>
+                                        </button>
                                 </div>
                             </div>
                         </div>
@@ -31,11 +38,11 @@ export default class AuktionList extends React.Component{
                 </div>
                </div> 
             )
-        });
+        })) : null
 
         return(<div>
 
-                <h1> Alla auktioner </h1>
+                <h1> Alla aktuell auktioner </h1>
                 <div> {auktion} </div>
             
             </div>)
