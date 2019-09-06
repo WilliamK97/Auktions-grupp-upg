@@ -9,7 +9,11 @@ export default function Tables(props){
                 <li>{bud.Summa}</li>
             </span>
         )
-    })) : null
+    })) : (
+        <div className="center">
+            <h4>Inga bud, bli den första som budar</h4>
+        </div>
+    )
 
     return(
         <div>

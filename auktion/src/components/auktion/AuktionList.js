@@ -39,7 +39,11 @@ export default class AuktionList extends React.Component{
                 </div>
                </div> 
             )
-        })) : null
+        })) : (
+            <div className="center">
+                <h4>Inga auktioner hittades</h4>
+            </div>
+        )
 
         return(<div>
 
