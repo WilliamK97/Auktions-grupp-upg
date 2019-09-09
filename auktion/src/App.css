@@ -9,3 +9,9 @@
 .padding{
   padding-left: 3rem;
 }
+
+.row:after {
+  content: "";
+  display: inline;
+  clear: both;
+}
