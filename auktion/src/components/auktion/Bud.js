@@ -7,6 +7,7 @@ export default class Bud extends React.Component{
         auktionID: null,
         budgivare: null
     }
+    
     handleChange = (e) => {
         this.setState({
           [e.target.id]: e.target.value
@@ -19,28 +20,21 @@ export default class Bud extends React.Component{
         const aktionsid = this.props.auktion.AuktionID;
 
         const url = 'http://nackowskis.azurewebsites.net/api/Bud/2130/'
-        const url2 = `http://nackowskis.azurewebsites.net/api/Bud/2130/${aktionsid}`
-        const bud = e.target.summa.value;
+        const auktionUrl = `http://nackowskis.azurewebsites.net/api/Bud/2130/${aktionsid}`
 
-        fetch(url2)
+        fetch(auktionUrl)
         .then(response => response.json())
         .then(json => 
             this.setState({
                 bud: json
         }));
 
-        // function checkSum(sum) {
-        //     return sum < bud;
-        // }
-
-        // const hogstaBud = this.props.bud.filter(checkSum);
-
-        const hogstaBud = this.props.bud.filter(b => {
-            return e.target.summa.value < b.Summa+1
+        const hogstaBud = this.props.bud.filter(bud => {
+            return e.target.summa.value < bud.Summa+1
         })
 
         if (hogstaBud.length !== 0) {
-            return alert ('Hej');
+            return alert ('Ange ett bud som är högre än högsta befintligt bud!');
         }
         else {
             const nyttBud = {"Summa": e.target.summa.value,
