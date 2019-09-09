@@ -59,7 +59,6 @@ export default class Bud extends React.Component{
             <span key={bud.BudID}>
                 <li>{bud.Budgivare}</li>
                 <li>{bud.Summa}</li>
-                <li>{bud.AuktionID}</li>
             </span>
         )
     })) : (
