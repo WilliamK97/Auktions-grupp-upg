@@ -5,12 +5,8 @@ import AuktionsContainer from './AuktionContainer'
 export default class AuktionList extends React.Component{
     render ()
     {
-        const todaysDate = Date.now();
-        const aktuellaAuktioner = this.props.auktion.filter(a => {
-            return Date.parse(a.SlutDatum) >= todaysDate;
-        });
-
-        let auktion = aktuellaAuktioner!== undefined ?  (aktuellaAuktioner.map( a => {
+        console.log(this.props.auktion);
+        let auktion = this.props.auktion !== undefined ?  (this.props.auktion.map(a => {
             return (
             <div>
                 <div  key={a.AuktionID} className="row">

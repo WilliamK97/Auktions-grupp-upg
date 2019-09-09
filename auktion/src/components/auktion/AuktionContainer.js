@@ -9,7 +9,6 @@ import {  BrowserRouter, Route } from 'react-router-dom';
 const url = "http://nackowskis.azurewebsites.net/api/Auktion/2130/";
 
 export class AuktionContainer extends Component {
-
     constructor(props)
     {
         super(props);
@@ -17,7 +16,7 @@ export class AuktionContainer extends Component {
             auktions: [],
             bud:[],
             auktion1:[],
-            searchAuktion: undefined
+            searchFilter: (list) => list.filter(a => Date.parse(a.SlutDatum) >= Date.now()),
         }
     }
 
@@ -56,17 +55,12 @@ export class AuktionContainer extends Component {
         e.preventDefault();
         const search = e.target.search.value;
         if(search !== "") {
-            const searchValue = this.state.auktions.filter(auktion   => {
-                return auktion.Titel.toLowerCase().includes(search.toLowerCase());
-            })
             this.setState({
-                searchAuktion: searchValue
+                searchFilter: (list) => list.filter(a => a.Titel.toLowerCase().includes(search.toLowerCase())),
             });
         } else {
             this.setState({
-                searchAuktion: this.state.auktions.filter(auktion => {
-                    return Date.parse(auktion.SlutDatum) >= Date.now();
-                })
+                searchFilter: list => list.filter(a => Date.parse(a.SlutDatum) >= Date.now()),
             })
         }
     }
@@ -76,15 +70,13 @@ export class AuktionContainer extends Component {
         return (
             <div>
                 <span className="center">
-                <Search hej={this.handleSearch}/>
+                <Search handleSearch={this.handleSearch}/>
                 </span>
               <BrowserRouter>
-                <Route exact path='/' component={() => <AuktionList auktion={this.state.auktions} handleBudId={this.handleBudId} />}></Route>
-                <Route path='/auktion' component={() => <Bud auktion={this.state.auktion1} bud={this.state.bud} />}></Route>
+                <Route exact path='/' component={() => <AuktionList auktion={this.state.searchFilter(this.state.auktions)} handleBudId={this.handleBudId} />}></Route>
+                <Route path='/auktion/:auktionsId' component={() => <Bud auktion={this.state.auktion1} bud={this.state.bud} />}></Route>
                 </BrowserRouter>  
-
                 </div>
-            
         )
     }
 }
