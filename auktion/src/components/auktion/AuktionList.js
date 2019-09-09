@@ -1,11 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import AuktionsContainer from './AuktionContainer'
 
 export default class AuktionList extends React.Component{
     render ()
     {
         const todaysDate = Date.now();
-
         const aktuellaAuktioner = this.props.auktion.filter(a => {
             return Date.parse(a.SlutDatum) >= todaysDate;
         });
@@ -14,8 +14,8 @@ export default class AuktionList extends React.Component{
             return (
             <div>
                 <div  key={a.AuktionID} className="row">
-                    <div className="col s4">
-                        <div className="card blue-grey darken-1">
+                    <div className="col s12 m4">
+                        <div className="card blue-grey darken-1 card small">
                             <div className="card-content white-text">
                                 <div className="card-title orange-text">{a.Titel}</div>
                                 <div class="card-content">
