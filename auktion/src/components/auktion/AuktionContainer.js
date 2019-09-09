@@ -16,7 +16,8 @@ export class AuktionContainer extends Component {
         this.state = { 
             auktions: [],
             bud:[],
-            auktion1:[]
+            auktion1:[],
+            searchAuktion: undefined
         }
     }
 
@@ -51,11 +52,31 @@ export class AuktionContainer extends Component {
         }));        
     }
 
+    handleSearch = (e) => {
+        e.preventDefault();
+        const search = e.target.search.value;
+        if(search !== "") {
+            const searchValue = this.state.auktions.filter(auktion   => {
+                return auktion.Titel.toLowerCase().includes(search.toLowerCase());
+            })
+            this.setState({
+                searchAuktion: searchValue
+            });
+        } else {
+            this.setState({
+                searchAuktion: this.state.auktions.filter(auktion => {
+                    return Date.parse(auktion.SlutDatum) >= Date.now();
+                })
+            })
+        }
+    }
+
     render() {
+
         return (
             <div>
                 <span className="center">
-                <Search/>
+                <Search hej={this.handleSearch}/>
                 </span>
               <BrowserRouter>
                 <Route exact path='/' component={() => <AuktionList auktion={this.state.auktions} handleBudId={this.handleBudId} />}></Route>

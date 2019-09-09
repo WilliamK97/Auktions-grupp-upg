@@ -1,5 +1,4 @@
 import React from 'react'
-import AuktionContainer from './AuktionContainer'
 
 export default function Tables(props){
     const budArray = props.bud !== undefined ? (props.bud.map(bud => {
