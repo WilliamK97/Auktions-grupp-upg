@@ -27,7 +27,6 @@ export class AuktionContainer extends Component {
         .then( json => console.log(json) + this.setState({
             auktions: json
          }));
-
     }
 
     handleBudId = (e) => {
@@ -73,8 +72,8 @@ export class AuktionContainer extends Component {
                 <Search handleSearch={this.handleSearch}/>
                 </span>
               <BrowserRouter>
-                <Route exact path='/' component={() => <AuktionList auktion={this.state.searchFilter(this.state.auktions)} handleBudId={this.handleBudId} />}></Route>
-                <Route path='/auktion/:auktionsId' component={() => <Bud auktion={this.state.auktion1} bud={this.state.bud} />}></Route>
+                <Route exact path='/' component={() => <AuktionList auktion={this.state.searchFilter(this.state.auktions)} bud={this.state.bud} handleBudId={this.handleBudId} />}></Route>
+                <Route path='/auktion/' component={() => <Bud auktion={this.state.auktion1} bud={this.state.bud} />}></Route>
                 </BrowserRouter>  
                 </div>
         )

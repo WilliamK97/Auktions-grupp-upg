@@ -1,11 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import AuktionsContainer from './AuktionContainer'
 
 export default class AuktionList extends React.Component{
+    state = { 
+        bud: this.props.bud
+    }
     render ()
     {
-        console.log(this.props.auktion);
         let auktion = this.props.auktion !== undefined ?  (this.props.auktion.map(a => {
             return (
             <div>

@@ -9,20 +9,21 @@ export default class Bud extends React.Component {
         budgivare: null
     }
 
-    componentDidMount() {
-        console.log("State", this.props);
-        const auktionsid = this.state.auktion.AuktionID;
-        const url = `http://nackowskis.azurewebsites.net/api/auktion/2130/${auktionsid}`
-        fetch(url)
-            .then(response => response.json())
-            .then(json => {
-                console.log(json);
-                this.setState({
-                    auktion: json
-                })
-            });
 
-    }
+    // componentDidMount() {
+    //     console.log("State", this.props);
+    //     const auktionsid = this.state.bud.AuktionID;
+    //     console.log(this.state.bud);
+    //     const url = `http://nackowskis.azurewebsites.net/api/bud/2130/${auktionsid}`
+    //     fetch(url)
+    //         .then(response => response.json())
+    //         .then(json => {
+    //             console.log(json);
+    //             this.setState({
+    //                 auktion: json
+    //             })
+    //         });
+    // }
 
     handleChange = (e) => {
         this.setState({
@@ -32,22 +33,31 @@ export default class Bud extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+        console.log(this.state.bud);
 
         const auktionsid = this.state.auktion.AuktionID;
         const url = 'http://nackowskis.azurewebsites.net/api/Bud/2130/'
-        const budUrl = `http://nackowskis.azurewebsites.net/api/Bud/2130/${auktionsid}`
-        const hogstaBud = this.props.bud.map(bud => bud.Summa).reduce((a, b) => a > b ? a : b);
+        //const budUrl = `http://nackowskis.azurewebsites.net/api/Bud/2130/${auktionsid}`
+        //const hogstaBud = this.props.bud.map(bud => bud.Summa).reduce((a, b) => a > b ? a : b);
+        var hogstaBud;
+        console.log(Date.parse(this.state.auktion.SlutDatum));
         const bud = e.target.summa.value;
-        const utropspris = this.state.auktion.Utropspris;
-        console.log(utropspris);
+        const utropspris = this.state.auktion.Utropspris;   
 
-        if (bud < hogstaBud + 1) {
-            return alert('Ange ett bud som är högre än högsta befintligt bud!');
-        }
-        else if (bud < utropspris + 1) {
-            return alert('Ange ett bud som är högre än utropspriset!');
+        if (this.state.bud.length < 1) {
+             hogstaBud = this.state.auktion.Utropspris
         }
         else {
+             hogstaBud = this.props.bud.map(bud => bud.Summa).reduce((a, b) => a > b ? a : b)
+        }
+        
+        if (bud <= hogstaBud) {
+            return alert('Ange ett bud som är högre än högsta befintligt bud!');
+        }
+        else if (bud <= utropspris) {
+            return alert('Ange ett bud som är högre än utropspriset!');
+        }
+        else if (bud > hogstaBud) {
             const nyttBud = {
                 "Summa": e.target.summa.value,
                 "Budgivare": e.target.budgivare.value,
@@ -63,17 +73,13 @@ export default class Bud extends React.Component {
                 }
             }).then(function (data) {
                 console.log('Request success: ', 'posten skapad');
-            })
-
-            fetch(budUrl)
-                .then(response => response.json())
-                .then(json => {
-                    console.log(json);
-                    this.setState({
-                        bud: json
-                    })
-                });
+            }) 
+            return alert('Budet lagt!', window.location.href = "http://localhost:3000/")
         }
+        else {
+            return alert('Ange ett giltigt bud!');
+        }
+
     }
     render() {
         const budArray = this.state.bud !== undefined ? (this.state.bud.map(bud => {
@@ -89,12 +95,19 @@ export default class Bud extends React.Component {
                 </div>
             )
 
+        var hogstaBud;
+        if (this.state.bud.length < 1) {
+            hogstaBud = this.state.auktion.Utropspris
+       }
+       else {
+            hogstaBud = this.props.bud.map(bud => bud.Summa).reduce((a, b) => a > b ? a : b)
+       }
+        if (Date.parse(this.state.auktion.SlutDatum) > Date.now()){
         return (
             <div>
                 <h1>{this.state.auktion.Titel}</h1>
                 <p>{this.state.auktion.Beskrivning}</p>
                 <p>{this.state.auktion.SlutDatum}</p>
-                <p>{this.state.auktion.AuktionID}</p>
                 <ul>{budArray}</ul>
                 <div>
                     <form onSubmit={this.handleSubmit}>
@@ -107,6 +120,16 @@ export default class Bud extends React.Component {
                 </div>
             </div>
         )
+        }
+        else{
+            return (
+                <div>
+                    <h1>{this.state.auktion.Titel}</h1>
+                    <p>{this.state.auktion.Beskrivning}</p>
+                    <p>{this.state.auktion.SlutDatum}</p>
+                    <ul>{hogstaBud}</ul>
+                </div>
+            )
+        }
     }
 }
-
