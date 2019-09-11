@@ -15,3 +15,17 @@
   display: inline;
   clear: both;
 }
+.red{
+  text-decoration-color:  red;
+}
+.stor{
+  font-size: 2rem;
+}
+.litem{
+  font-size: 1.5rem;
+}
+.p{
+  padding: 2rem;
+  margin-bottom: 1rem;
+  border-radius: 25px;
+}

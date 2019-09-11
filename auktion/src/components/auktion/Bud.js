@@ -84,10 +84,13 @@ export default class Bud extends React.Component {
     render() {
         const budArray = this.state.bud !== undefined ? (this.state.bud.map(bud => {
             return (
+                <div className="container">
                 <span key={bud.BudID}>
-                    <li>{bud.Budgivare}</li>
-                    <li>{bud.Summa}</li>
+                    <li className="orange-text">{bud.Budgivare}</li>
+                    <li>{bud.Summa} kr</li>
+                    <hr/>
                 </span>
+                </div>
             )
         })) : (
                 <div className="center">
@@ -104,18 +107,35 @@ export default class Bud extends React.Component {
        }
         if (Date.parse(this.state.auktion.SlutDatum) > Date.now()){
         return (
-            <div>
-                <h1>{this.state.auktion.Titel}</h1>
-                <p>{this.state.auktion.Beskrivning}</p>
-                <p>{this.state.auktion.SlutDatum}</p>
+<div>
+            <div className="row">
+                    <div className="col s12">
+                        <div className="card blue-grey darken-1 card small">
+                            <div className="card-content white-text">
+                            <div className="card-title orange-text">{this.state.auktion.Titel}</div>
+                                <div class="card-content">
+                                    <p className="orange-text">Beskrivning:</p>
+                                    <p>{this.state.auktion.Beskrivning}</p>
+                                    <hr/>
+                                    <p>Utropspris:  {this.state.auktion.Utropspris} kr</p>
+                                    <ul>Hösta Bud just nu: {hogstaBud} kr</ul>
+                                    <hr/>
+                                    <p><span>Slutdatum:  {this.state.auktion.SlutDatum}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <ul>{budArray}</ul>
-                <div>
+                <div className="container blue-grey darken-1 p">
+                    <h3 className="orange-text">Lägg Bud</h3>
                     <form onSubmit={this.handleSubmit}>
-                        <label htmlFor="summa">Summa: </label>
-                        <input type="text" id="summa" name="summa" onChange={this.handleChange} />
-                        <label htmlFor="budgivare">Budgivare: </label>
-                        <input type="text" id="budgivare" onChange={this.handleChange} />
-                        <button>Lägg bud</button>
+                        <label className="white-text litem" htmlFor="summa">Summa: </label>
+                        <input className="white-text" type="text" id="summa" name="summa" onChange={this.handleChange} />
+                        <label className="white-text litem" htmlFor="budgivare">Budgivare: </label>
+                        <input className="white-text" type="text" id="budgivare" onChange={this.handleChange} />
+                        <button className="orange btn btn:hover center">Lägg bud</button>
                     </form>
                 </div>
             </div>
@@ -123,12 +143,26 @@ export default class Bud extends React.Component {
         }
         else{
             return (
-                <div>
-                    <h1>{this.state.auktion.Titel}</h1>
-                    <p>{this.state.auktion.Beskrivning}</p>
-                    <p>{this.state.auktion.SlutDatum}</p>
-                    <ul>{hogstaBud}</ul>
+                <div className="row">
+                    <div className="col s12">
+                        <div className="card blue-grey darken-1 card medium">
+                            <div className="card-content white-text">
+                            <div className="card-title orange-text">{this.state.auktion.Titel}</div>
+                            <p className="stor">Den här auktionen är sold!</p>
+                                <div class="card-content">
+                                    <p className="orange-text">Beskrivning:</p>
+                                    <p>{this.state.auktion.Beskrivning}</p>
+                                    <hr/>
+                                    <p>Utropspris:  {this.state.auktion.Utropspris} kr</p>
+                                    <ul>Vinnande Budet: {hogstaBud} kr</ul>
+                                    <hr/>
+                                    <p><span className="red">Slutdatum:  {this.state.auktion.SlutDatum}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
             )
         }
     }

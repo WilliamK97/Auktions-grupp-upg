@@ -16,16 +16,18 @@ export default class AuktionList extends React.Component{
                             <div className="card-content white-text">
                                 <div className="card-title orange-text">{a.Titel}</div>
                                 <div class="card-content">
+                                    <p className="orange-text">Beskrivning</p>
                                     <p>{a.Beskrivning}</p>
                                     <hr/>
-                                    <p>{a.Utropspris} kr</p>
+                                    <p>Utropspris:  {a.Utropspris} kr</p>
                                     <hr/>
                                     <p>Slutdatum: {a.SlutDatum.slice(5, -9)}</p>
-                                    <p>Visa mer:</p>
+                                    
                                     
                                 </div>
                                 {/* fixa route här till annonsen på en ny sida */}
                                 <div className="card-action padding">
+                                <p>Visa mer:</p>
                                     <button className="orange btn btn:hover center" onClick={this.props.handleBudId}>
                                         <NavLink className="orange-text" to='/auktion'>{a.AuktionID}</NavLink>
                                         </button>
