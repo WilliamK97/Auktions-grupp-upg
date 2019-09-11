@@ -73,8 +73,9 @@ export default class Bud extends React.Component {
                 }
             }).then(function (data) {
                 console.log('Request success: ', 'posten skapad');
+                return alert('Budet lagt!', window.location.href = "http://localhost:3000/")
             }) 
-            return alert('Budet lagt!', window.location.href = "http://localhost:3000/")
+            //return alert('Budet lagt!', window.location.href = "http://localhost:3000/")
         }
         else {
             return alert('Ange ett giltigt bud!');
