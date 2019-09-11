@@ -3,6 +3,7 @@ import AuktionList from "./AuktionList"
 import Search from "./Search"
 import Bud from "./Bud"
 import {  BrowserRouter, Route } from 'react-router-dom';
+import NewAuction from './NewAuktion';
 
 
 
@@ -74,6 +75,7 @@ export class AuktionContainer extends Component {
               <BrowserRouter>
                 <Route exact path='/' component={() => <AuktionList auktion={this.state.searchFilter(this.state.auktions)} bud={this.state.bud} handleBudId={this.handleBudId} />}></Route>
                 <Route path='/auktion/' component={() => <Bud auktion={this.state.auktion1} bud={this.state.bud} />}></Route>
+                <Route path='/NewAuction' component = {NewAuction} />
                 </BrowserRouter>  
                 </div>
         )

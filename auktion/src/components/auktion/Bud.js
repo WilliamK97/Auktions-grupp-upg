@@ -126,10 +126,53 @@ export default class Bud extends React.Component {
                         </div>
                     </div>
                 </div>
-
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
                 <ul>{budArray}</ul>
+                
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
                 <div className="container blue-grey darken-1 p">
-                    <h3 className="orange-text">Lägg Bud</h3>
+                    <h5 className="orange-text">Lägg Bud</h5>
                     <form onSubmit={this.handleSubmit}>
                         <label className="white-text litem" htmlFor="summa">Summa: </label>
                         <input className="white-text" type="text" id="summa" name="summa" onChange={this.handleChange} />

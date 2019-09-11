@@ -9,7 +9,7 @@ export default class Nav extends React.Component {
                 <a href="/" className="brand-logo orange-text">Auktion App</a>
                 <ul id="nav-mobile" className="right hide-on-med-and-down">
                     <li><a href="/">Home</a></li>
-                    <li><a href="/new">New Auktion</a></li>
+                    <li><a href="/NewAuction">New Auction</a></li>
 
                 </ul>
                 </div>

@@ -1,66 +1,117 @@
-import React from 'react'
+import React from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import {Redirect} from 'react-router-dom';
 
 export default class NewAuktion extends React.Component {
-    render(){
-    return(
-        <div className="container">
-            <h4 className="center">New Auktion</h4>
-            <div className="container">
-                <div className="row create-auction">
-                <form className="col s12">
-                    <div className="input-field">
-                        <i className="material-icons prefix">text_format</i>
-                        <label htmlFor="Titel"></label>
-                        <input placeholder="Title" id="Titel" name="Titel" type="text" required/>
-                    </div>
+    state = {
+        Titel: null,
+        SlutDatum: null,
+        Utropspris: null,
+        Beskrivning: null,
+        SkapadAv: null,
+        auctionSubmitted: false
+      };
+    
+    handleChange = (e) => {
+        this.setState({
+            [e.target.id]: e.target.value
+        });
+    }
 
-                    <div className="input-field">
-                        <i className="material-icons prefix">description</i>
-                        <label htmlFor="Beskrivning"> </label>
-                        <input placeholder="Description" id="Beskrivning" name="Beskrivning" ref="Beskrivning" type="text" required/>
-                    </div>
+    handleSubmit = (e) => {
+        e.preventDefault();
 
-                    {/* todays date med value={moment().format('MMM DD, YYYY')}*/}
-                    <div className="input-field">
-                        <i className="material-icons prefix">date_range</i>
-                        <label htmlFor="StartDatum"></label>
-                        <input placeholder="Start Date" className="black-border" type="text" id="StartDatum" name="StartDatum" /* value={moment().format('MMM DD, YYYY')} */ readOnly />
-                    </div>
-                    
-                    {/* date picker med ref={this.datepicker}*/}
-                    <div className="input-field">
-                        <i className="material-icons prefix">date_range</i>
-                        <label htmlFor="SlutDatum"></label>
-                        <input placeholder="End Date" type="text" className="datepicker" id="SlutDatum" name="SlutDatum" /* ref={this.datepicker} */ required />
-                    </div>
+        const url = 'http://nackowskis.azurewebsites.net/api/Auktion/2130/';
+        const input = {
+            Titel: this.state.Titel,
+            Beskrivning: this.state.Beskrivning,
+            StartDatum: new Date().toJSON(),
+            SlutDatum: new Date(this.state.SlutDatum).toJSON(),
+            Gruppkod: 2130,
+            Utropspris: this.state.Utropspris,
+            SkapadAv: this.state.SkapadAv
+        }
 
-                    <div className="input-field">
-                        <i className="material-icons prefix">attach_money</i>
-                        <label htmlFor="Utropspris"></label>
-                        <input placeholder="Starting Price" id="Utropspris" name="Utropspris" type="text" /* onChange={this.handleChange} */ required />
-                    </div>
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(input),
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => this.setState({auctionSubmitted: response.ok}))
+        .catch(error => console.error('Error:', error));
+        
+    }
+    
+    handleSelect = date => {
+        this.setState({
+            SlutDatum: date.setHours(date.getHours() + 2)
+        });  
+    };
 
-                    <div className="input-field">
-                        <i className="material-icons prefix">image</i>
-                        <label htmlFor="img"></label>
-                        <input placeholder="Add Picture" type="text" ref="img" id="img" name="img" /* onChange={this.handleChange} */ required />
+    render() {
+        let endDate = new Date();
+        if(this.state.auctionSubmitted)
+        {
+            return <Redirect to="/" />
+        }
+        return (
+            
+                <div className="row container">
+                    <div className="col s12">
+                        <div className="card blue-grey darken-1">
+                            <div className="card-content white-text">
+                                <span className="card-title orange-text">Create new auction</span>
+                                <form onSubmit={this.handleSubmit}>
+                                    <div className="input-field">
+                                        <input type="text" id="Titel" onChange={this.handleChange} />
+                                        <label htmlFor="Titel">Title</label>
+                                    </div>
+                                    <label htmlFor="SlutDatum">End date</label>
+                                    <br />
+                                    <DatePicker
+                                        selected={this.state.SlutDatum}
+                                        onSelect={this.handleSelect}
+                                        minDate={endDate}
+                                        dateFormat="MMMM d, yyyy h:mm aa"
+                                    />
+                                    <div>
+                                        <div className="input-field inline">
+                                            <input
+                                                type="number"
+                                                id="Utropspris"
+                                                onChange={this.handleChange}
+                                            />
+                                            <label htmlFor="Utropspris">Starting price</label>
+                                        </div>
+                                         SEK
+                                    </div>
+                                    <div className="input-field">
+                                        <textarea
+                                            id="Beskrivning"
+                                            className="materialize-textarea"
+                                            onChange={this.handleChange}
+                                        />
+                                        <label htmlFor="Beskrivning">Information about the product</label>
+                                    </div>
+                                    <div className="input-field">
+                                        <textarea
+                                            id="SkapadAv"
+                                            className="materialize-textarea"
+                                            onChange={this.handleChange}
+                                        />
+                                        <label htmlFor="SkapatAv">Seller </label>
+                                    </div>
+                                    <button id="createNewCMD" className="orange btn btn:hover center">Create new auktion</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-
-                    <div className="input-field">
-                        <i className="material-icons prefix">border_color</i>
-                        <label htmlFor="SkapadAv"></label>
-                        <input placeholder="Created by" id="SkapadAv" name="SkapadAv" type="text" /* onChange={this.handleChange} */ required />
-                    </div>
-                    <div className="input-field center">
-                        <button className="btn btn:hover center">Save Auction</button>
-                    </div>
-                    
-                </form>
-                
                 </div>
-                
-            </div>
-        </div>
-    )
-}
+            
+        );
+    }
 }

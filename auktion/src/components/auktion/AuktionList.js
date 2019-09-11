@@ -15,7 +15,7 @@ export default class AuktionList extends React.Component{
                         <div className="card blue-grey darken-1 card small">
                             <div className="card-content white-text">
                                 <div className="card-title orange-text">{a.Titel}</div>
-                                <div class="card-content">
+                                <div className="card-content">
                                     <p className="orange-text">Beskrivning</p>
                                     <p>{a.Beskrivning}</p>
                                     <hr/>
