@@ -150,9 +150,9 @@ export default class Bud extends React.Component {
                     <h5 className="orange-text">Lägg Bud</h5>
                     <form onSubmit={this.handleSubmit}>
                         <label className="white-text litem" htmlFor="summa">Summa: </label>
-                        <input className="white-text" type="text" id="summa" name="summa" onChange={this.handleChange} />
+                        <input className="white-text" type="text" id="summa" name="summa" onChange={this.handleChange} required />
                         <label className="white-text litem" htmlFor="budgivare">Budgivare: </label>
-                        <input className="white-text" type="text" id="budgivare" onChange={this.handleChange} />
+                        <input className="white-text" type="text" id="budgivare" onChange={this.handleChange} required />
                         <button className="orange btn btn:hover center">Lägg bud</button>
                     </form>
                 </div>
